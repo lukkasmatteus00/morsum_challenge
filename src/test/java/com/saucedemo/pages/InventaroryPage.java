@@ -20,12 +20,19 @@ public class InventaroryPage {
         page.click("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a");
     }
 
+    public void addItemByPosition(Integer position) {
+        page.click("#inventory_container > div > div:nth-child("+position+") button");
+    }
+
     public void selectItemByName(String productName) {
         page.click("text="+productName);
     }
 
     public String getItemName(Integer position) {
-        return page.locator("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a").textContent();
+        if (position == 1)
+            return page.locator("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a").first().textContent();
+        else
+            return page.locator("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a").textContent();
     }
 
 

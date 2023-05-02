@@ -3,6 +3,8 @@ package com.saucedemo.pages;
 import static org.junit.Assert.*;
 import com.microsoft.playwright.Page;
 
+import java.util.ArrayList;
+
 public class CartPage {
     private Page page;
 
@@ -10,13 +12,11 @@ public class CartPage {
         this.page = page;
     }
 
-    public void assertItem(String expected) {
-        String actual = page.locator("[class='inventory_item_name']").textContent();
-        assertEquals(expected, actual);
-    }
+    public void assertProdudctsName(ArrayList<String> expected) {
+        for (String productName: expected) {
+            String actual = page.getByText(productName).first().textContent();
+            assertEquals(productName, actual);
+        }
 
-    public void assertQuantanty(Integer expected) {
-        String actual = page.locator("[class='cart_quantity']").textContent();
-        assertEquals(expected.toString(), actual);
     }
 }

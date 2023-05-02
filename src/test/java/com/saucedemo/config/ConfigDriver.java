@@ -10,8 +10,7 @@ public final class ConfigDriver{
 		 return Playwright.create()
 				.firefox()
 				.launch(new BrowserType.LaunchOptions()
-						.setHeadless(false)
-						.setSlowMo(500));
+						.setHeadless(false));
 	}
 
 	public static Page openPage(Browser browser,String url){

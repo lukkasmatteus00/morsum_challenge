@@ -6,6 +6,8 @@ import com.saucedemo.config.ConfigDriver;
 import com.saucedemo.pages.*;
 import cucumber.api.java.en.*;
 
+import java.util.ArrayList;
+
 public class stepDefinition {
     LoginPage loginPage;
     InventaroryPage inventaroryPage;
@@ -14,7 +16,7 @@ public class stepDefinition {
     MenuPage menuPage;
     Browser browser;
     Page page;
-    String itemName = "";
+    ArrayList<String> productNames = new ArrayList<>();
 
     @Given("user open the saucedemo page")
     public void user_open_the_browser() {
@@ -42,16 +44,23 @@ public class stepDefinition {
     @When("user selects second item from the list")
     public void user_selects_second_item_from_the_list(){
         Integer position = 2;
-        itemName = inventaroryPage.getItemName(position);
+        productNames.add(inventaroryPage.getItemName(position));
         inventaroryPage.selectItemByPosition(position);
     }
 
     @When("user selects {string} product from the list")
     public void user_selects_product_from_the_list(String productName){
-        itemName = productName;
+        productNames.add(productName);
         inventaroryPage.selectItemByName(productName);
     }
 
+    @When("user add to cart the first 3 elements")
+    public void user_add_to_cart_the_first_3_elements(){
+        for ( int position = 1; position <= 3; position ++) {
+            productNames.add(inventaroryPage.getItemName(position));
+            inventaroryPage.addItemByPosition(position);
+        }
+    }
     @When("user add this element to cart")
     public void user_add_this_element_to_cart(){
         inventaroryItemPage.clickAddToCart();
@@ -64,8 +73,8 @@ public class stepDefinition {
 
     @Then("user validate that all products selected are in the cart")
     public void user_validate_that_all_products_selected_are_in_the_cart(){
-        cartPage.assertItem(itemName);
-        cartPage.assertQuantanty(1);
+        menuPage.assertCartItemsNumber(productNames.size());
+        cartPage.assertProdudctsName(productNames);
 
         ConfigDriver.finishDriver(browser);
     }

@@ -6,8 +6,8 @@ package com.saucedemo.runners;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        tags            = "@addProduct",
-        plugin          = {"pretty","html: cucumber-html-reports"},
+        //tags            = "@addProducts",
+        plugin          = {"pretty","html:cucumber-html-reports"},
         features        = "src/test/resources/features/",
         glue            = {"com.saucedemo.steps"}
 )

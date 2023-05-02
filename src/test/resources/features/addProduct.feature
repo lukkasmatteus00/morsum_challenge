@@ -20,3 +20,9 @@ Feature: Add product to cart
     And user add this element to cart
     And user goes to cart
     Then user validate that all products selected are in the cart
+
+  @addProducts
+  Scenario: [003] Add products to cart from index
+    And user add to cart the first 3 elements
+    And user goes to cart
+    Then user validate that all products selected are in the cart
