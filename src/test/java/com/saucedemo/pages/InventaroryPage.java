@@ -29,10 +29,7 @@ public class InventaroryPage {
     }
 
     public String getItemName(Integer position) {
-        if (position == 1)
-            return page.locator("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a").first().textContent();
-        else
-            return page.locator("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a").textContent();
+        return page.locator("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a").first().textContent();
     }
 
 
