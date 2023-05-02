@@ -16,13 +16,18 @@ public class InventaroryPage {
         page.selectOption(selector, option);
     }
 
-    public void selectItem(Integer position) {
+    public void selectItemByPosition(Integer position) {
         page.click("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a");
+    }
+
+    public void selectItemByName(String productName) {
+        page.click("text="+productName);
     }
 
     public String getItemName(Integer position) {
         return page.locator("#inventory_container > div > div:nth-child("+position+") div.inventory_item_label > a").textContent();
     }
+
 
     public void clickRemoveToCart(Integer position) {
         page.locator("btn_inventory").getByAltText("Remove").click();

@@ -43,7 +43,13 @@ public class stepDefinition {
     public void user_selects_second_item_from_the_list(){
         Integer position = 2;
         itemName = inventaroryPage.getItemName(position);
-        inventaroryPage.selectItem(position);
+        inventaroryPage.selectItemByPosition(position);
+    }
+
+    @When("user selects {string} product from the list")
+    public void user_selects_product_from_the_list(String productName){
+        itemName = productName;
+        inventaroryPage.selectItemByName(productName);
     }
 
     @When("user add this element to cart")
